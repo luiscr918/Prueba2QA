@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-primary">🐾 Directorio de Razas</h1>
+        <p class="text-muted">Explora las características únicas de cada canino</p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="list-group shadow-sm">
+                {% for raza in page_obj %}
+                <a href="{% url 'detalle_raza' raza.id %}" 
+                   class="list-group-item list-group-item-action d-flex justify-content-between align-items-center p-3 border-start border-primary border-4">
+                    <div>
+                        <h5 class="mb-1 fw-bold">{{ raza.nombre }}</h5>
+                        <small class="text-muted">Haga clic para ver detalles específicos</small>
+                    </div>
+                    <span class="btn btn-sm btn-outline-primary rounded-pill px-3">Ver más →</span>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <nav class="mt-5">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item"><a class="page-link shadow-sm" href="?page=1">Primero</a></li>
+                <li class="page-item"><a class="page-link shadow-sm" href="?page={{ page_obj.previous_page_number }}">Anterior</a></li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link shadow-sm">Anterior</span></li>
+            {% endif %}
+
+            <li class="page-item active">
+                <span class="page-link shadow-sm">{{ page_obj.number }} de {{ page_obj.paginator.num_pages }}</span>
+            </li>
+
+            {% if page_obj.has_next %}
+                <li class="page-item"><a class="page-link shadow-sm" href="?page={{ page_obj.next_page_number }}">Siguiente</a></li>
+                <li class="page-item"><a class="page-link shadow-sm" href="?page={{ page_obj.paginator.num_pages }}">Último</a></li>
+            {% else %}
+                <li class="page-item disabled"><span class="page-link shadow-sm">Siguiente</span></li>
+            {% endif %}
+        </ul>
+    </nav>
+</div>
+{% endblock %}

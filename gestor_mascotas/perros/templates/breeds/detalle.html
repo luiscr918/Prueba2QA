@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}{{ raza.nombre }}{% endblock %}
+
+{% block content %}
+<div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+        <h1 class="h3 mb-0">{{ raza.nombre }}</h1>
+    </div>
+    <div class="card-body">
+        <h4 class="text-muted">Descripción</h4>
+        <p class="lead">{{ raza.descripcion }}</p>
+        
+        <hr>
+        
+        <div class="row">
+            <div class="col-md-6">
+                <h5> Atributos Detallados</h5>
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Esperanza de vida
+                        <span class="badge bg-info rounded-pill">{{ raza.vida_min }} - {{ raza.vida_max }} años</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        ¿Es Hipoalergénico?
+                        {% if raza.hipoalergenico %}
+                            <span class="badge bg-success">Sí</span>
+                        {% else %}
+                            <span class="badge bg-secondary">No</span>
+                        {% endif %}
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <a href="{% url 'lista_razas' %}" class="btn btn-outline-primary">
+                ⬅ Volver a la lista
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
