@@ -4,7 +4,7 @@ from .models import Raza
 
 def lista_razas(request):
     todas_las_razas = Raza.objects.all()
-    # Mostramos 5 razas por página (puedes cambiar este número)
+    # Mostramos 5 razas por página 
     paginator = Paginator(todas_las_razas, 5) 
     
     page_number = request.GET.get('page')

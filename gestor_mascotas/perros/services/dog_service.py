@@ -10,7 +10,6 @@ def load_breeds():
     response = requests.get(API_URL)
     data = response.json()
     
-    # La API v2 trae los perros en data['data']
     breeds_list = data.get('data', [])
     
     for item in breeds_list:
